@@ -1,0 +1,84 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table d_pais {
+  country_id uuid [pk]
+  country varchar(128) 
+}
+
+Table d_estado {
+  state_id uuid [pk]
+  state varchar(128)
+  country_id uuid
+}
+
+Table d_cidade {
+  city_id int [pk]
+  city varchar(256)
+  state_id uuid
+}
+
+Table d_clientes {
+  customer_id uuid [pk]
+  first_name varchar(128)
+  last_name varchar(128)
+  customer_city int
+  country_name varchar(128)
+  cpf int
+}
+
+Table d_contas {
+  account_id uuid [pk]
+  customer_id uuid
+  created_at timestamp
+  status varchar(128)
+  account_branch varchar(128)
+  account_check_digit varchar(128)
+  account_number varchar(128)
+}
+Table d_calendario {
+data
+}
+Table f_entrada_fluxo {
+  id uuid [pk]
+  account_id uuid
+  amount float
+  transaction_requested_at int
+  transaction_completed_at int
+  status varchar(128)
+  data_entrada data
+}
+
+Table f_saida_fluxo {
+  id uuid [pk]
+  account_id uuid
+  amount float
+  transaction_requested_at int
+  transaction_completed_at int
+  status varchar(128)
+  data_saida data
+}
+
+Table f_mov_pix {
+  id uuid [pk]
+  account_id uuid
+  in_or_out varchar(128)
+  pix_amount float
+  pix_requested_at int
+  pix_completed_at int
+  status varchar(128)
+  data_mov_pix data
+}
+
+// Foreign key relationships
+Ref: d_estado.country_id > d_pais.country_id
+Ref: d_cidade.state_id > d_estado.state_id
+Ref: d_clientes.customer_city > d_cidade.city_id
+Ref: d_contas.customer_id > d_clientes.customer_id
+Ref: f_entrada_fluxo.account_id > d_contas.account_id
+Ref: f_saida_fluxo.account_id > d_contas.account_id
+Ref: f_mov_pix.account_id > d_contas.account_id
+Ref: f_entrada_fluxo.data_entrada > d_calendario.data
+Ref: f_saida_fluxo.data_saida > d_calendario.data
+Ref: f_mov_pix.data_mov_pix > d_calendario.data
+https://dbdiagram.io/d
