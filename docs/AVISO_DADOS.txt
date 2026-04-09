@@ -1,0 +1,5 @@
+# AVISO SOBRE OS DADOS
+
+Os dados contidos neste projeto, incluindo movimentações financeiras, nomes de clientes e detalhes de contas, são totalmente FIGTÍCIOS. 
+
+Este projeto foi desenvolvido exclusivamente para fins de demonstração de habilidades em Engenharia de Dados, ETL e Análise de BI. Nenhuma das informações presentes representa pessoas ou transações reais.

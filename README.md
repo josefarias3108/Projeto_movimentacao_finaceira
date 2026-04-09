@@ -1,5 +1,8 @@
 # 💰 Projeto de Análise de Movimentação Financeira
 
+> [!NOTE]
+> **Aviso Importante**: Todos os dados contidos neste projeto são **fictícios** e foram gerados apenas para fins de demonstração técnica e estudos de Engenharia de Dados.
+
 Projeto profissional de Engenharia de Dados focado na análise de fluxos financeiros, conversão de dados transacionais e preparação para dashboards (BI).
 
 ## 🚀 Arquitetura do Projeto
