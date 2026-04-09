@@ -47,3 +47,34 @@ class DataLoader:
             except Exception as e:
                 print(f"Erro ao salvar no banco: {str(e)}")
         return False
+
+    def load_from_db(self, table_name):
+        """Carrega uma tabela do PostgreSQL para um DataFrame"""
+        if self.engine:
+            try:
+                query = f"SELECT * FROM {table_name}"
+                df = pd.read_sql(query, self.engine)
+                print(f"✅ Tabela {table_name} carregada do banco de dados.")
+                return df
+            except Exception as e:
+                print(f"❌ Erro ao carregar tabela {table_name}: {str(e)}")
+        return None
+
+    def load_all_data(self):
+        """Tenta carregar de CSVs primeiro, se falhar, tenta do Banco de Dados"""
+        data = self.load_all_raw()
+        
+        # Se não encontrou CSVs, tenta carregar do DB
+        if not data and self.engine:
+            print("🔄 CSVs não encontrados. Tentando carregar do Banco de Dados...")
+            tables = [
+                'd_cidade', 'd_estado', 'd_pais', 'd_clientes', 
+                'd_contas', 'f_entrada_fluxo', 'f_saida_fluxo', 'f_mov_pix'
+            ]
+            for t in tables:
+                df = self.load_from_db(t)
+                if df is not None:
+                    # Remove o prefixo d_ ou f_ para manter consistência com o notebook
+                    name = t.split('_', 1)[1] if '_' in t else t
+                    data[name] = df
+        return data

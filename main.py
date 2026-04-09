@@ -13,7 +13,7 @@ def main():
 
     # 1. Extração (Extract)
     loader = DataLoader()
-    raw_data = loader.load_all_raw()
+    raw_data = loader.load_all_data()
 
     if not raw_data:
         print("⚠️ Nenhum dado encontrado para processar. Finalizando.")
